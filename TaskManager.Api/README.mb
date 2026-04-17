@@ -1,0 +1,10 @@
+# Task Manager API
+
+API desenvolvida em ASP.NET Core para gerenciamento de tarefas.
+
+## Tecnologias utilizadas
+
+- .NET 8
+- ASP.NET Core
+- Entity Framework Core
+- SQL Server
