@@ -1,6 +1,6 @@
 # Task Manager API
 
-API desenvolvida em ASP.NET Core para gerenciamento de tarefas.
+API REST desenvolvida em ASP.NET Core para gerenciamento de tarefas.
 
 ## Tecnologias utilizadas
 
@@ -8,3 +8,28 @@ API desenvolvida em ASP.NET Core para gerenciamento de tarefas.
 - ASP.NET Core
 - Entity Framework Core
 - SQL Server
+- Swagger (OpenAPI)
+
+## Funcionalidades
+
+- Criar tarefas
+- Listar tarefas
+- Atualizar tarefas
+- Remover tarefas
+- Filtrar tarefas por status
+
+## Arquitetura
+
+- Controllers: responsáveis pelos endpoints da API
+- Services: contém a lógica de negócio
+- Entities: modelos de domínio
+- DTOs: objetos de transferência de dados
+- Enums: definição de tipos fortes
+- Data: configuração do contexto do banco de dados
+
+## Padrões aplicados
+
+- Uso de DTO para entrada de dados
+- Uso de Enum para tipagem forte do status das tarefas
+- Separação de responsabilidades (Controller, Service, Data)
+- Serialização de Enum como string na resposta da API

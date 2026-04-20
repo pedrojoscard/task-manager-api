@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using TaskManager.Api.DTOs;
 using TaskManager.Api.Entities;
 using TaskManager.Api.Services;
 
@@ -23,16 +24,16 @@ public class TaskController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(TaskItem task)
+    public async Task<IActionResult> Create(CreateTaskDto dto)
     {
-        var created = await _service.Create(task);
+        var created = await _service.Create(dto);
         return Ok(created);
     }
     
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, TaskItem task)
+    public async Task<IActionResult> Update(int id, UpdateTaskDto dto)
     {
-        var updated = await _service.Update(id, task);
+        var updated = await _service.Update(id, dto);
 
         if (updated == null)
             return NotFound();

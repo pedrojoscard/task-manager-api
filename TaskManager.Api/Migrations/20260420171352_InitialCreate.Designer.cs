@@ -12,7 +12,7 @@ using TaskManager.Api.Data;
 namespace TaskManager.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260416220811_InitialCreate")]
+    [Migration("20260420171352_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -40,11 +40,10 @@ namespace TaskManager.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Tittle")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
