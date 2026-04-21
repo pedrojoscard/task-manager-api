@@ -33,3 +33,12 @@ API REST desenvolvida em ASP.NET Core para gerenciamento de tarefas.
 - Uso de Enum para tipagem forte do status das tarefas
 - Separação de responsabilidades (Controller, Service, Data)
 - Serialização de Enum como string na resposta da API
+- Padronização de respostas com ApiResponse
+- Validação de dados com FluentValidation
+- Middleware global para tratamento de exceções
+
+## Validação
+
+A API utiliza FluentValidation para validação automática dos dados de entrada, garantindo consistência e organização das regras de negócio.
+
+As validações são aplicadas nos DTOs e retornam mensagens claras em caso de erro.

@@ -12,8 +12,8 @@ namespace TaskManager.Api.Validators
 
             RuleFor(x => x.Status)
                 .NotEmpty().WithMessage("O status é obrigatório.")
-                .Must(s => new[] { "Todo", "Doin", "Done" }.Contains(s))
-                .WithMessage("Status inválido. Os valores válidos são: Todo, Doin e Done.");
+                .Must(s => new[] { "Todo", "Doing", "Done" }.Contains(s))
+                .WithMessage("Status inválido. Os valores válidos são: Todo, Doing e Done.");
         }
     }
 }

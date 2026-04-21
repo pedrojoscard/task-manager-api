@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Api.DTOs;
 using TaskManager.Api.Entities;
+using TaskManager.Api.Responses;
 using TaskManager.Api.Services;
 
 namespace TaskManager.Api.Controllers;
@@ -20,14 +21,14 @@ public class TaskController : ControllerBase
     public async Task<IActionResult> Get()
     {
         var tasks = await _service.GetAll();
-        return Ok(tasks);
+        return Ok(ApiResponse<List<TaskItem>>.SuccessResponse(tasks));
     }
 
     [HttpPost]
     public async Task<IActionResult> Create(CreateTaskDto dto)
     {
         var created = await _service.Create(dto);
-        return Ok(created);
+        return Ok(ApiResponse<TaskItem>.SuccessResponse(created));
     }
     
     [HttpPut("{id}")]
@@ -36,27 +37,27 @@ public class TaskController : ControllerBase
         var updated = await _service.Update(id, dto);
 
         if (updated == null)
-            return NotFound();
+            return NotFound(ApiResponse<TaskItem>.ErrorResponse(new List<string> { "Tarefa não encontrada." }));
 
-        return Ok(updated);
+        return Ok(ApiResponse<TaskItem>.SuccessResponse(updated));
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var deletd = await _service.Delete(id);
+        var deleted = await _service.Delete(id);
 
-        if (!deletd)
-            return NotFound();
+        if (!deleted)
+            return NotFound(ApiResponse<string>.ErrorResponse(new () { "Tarefa não encontrada." }));
 
-        return NoContent();
+        return Ok(ApiResponse<string>.SuccessResponse("Tarefa removida com sucesso."));
     }
 
     [HttpGet("status/{status}")]
     public async Task<IActionResult> GetByStatus(string status)
     {
         var tasks = await _service.GetByStatus(status);
-        return Ok(tasks);
+        return Ok(ApiResponse<List<TaskItem>>.SuccessResponse(tasks));
     }
 }
 
