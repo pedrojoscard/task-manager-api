@@ -18,9 +18,9 @@ public class TaskController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> Get(int page = 1, int pageSize = 10)
     {
-        var tasks = await _service.GetAll();
+        var tasks = await _service.GetAll(page, pageSize);
         return Ok(ApiResponse<List<TaskItem>>.SuccessResponse(tasks));
     }
 

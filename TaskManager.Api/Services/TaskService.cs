@@ -16,9 +16,12 @@ public class TaskService
         _context = context;
     }
 
-    public async Task<List<TaskItem>> GetAll()
+    public async Task<List<TaskItem>> GetAll(int page, int pageSize)
     {
-        return _context.Tasks.ToList();
+        return await _context.Tasks
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
     }
 
     public async Task<TaskItem> Create(CreateTaskDto dto)
