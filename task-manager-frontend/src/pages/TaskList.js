@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { getTasks, createTask } from "../services/api";
+ï»¿import { useEffect, useState } from "react";
+import { getTasks, createTask, deleteTask, updateTask } from "../services/api";
 
 function TaskList() {
     const [tasks, setTasks] = useState([]);
@@ -24,40 +24,89 @@ function TaskList() {
         setTitle("");
         setDescription("");
 
-        loadTasks(); // recarrega lista
+        loadTasks();
     };
+
+    const handleDelete = async (id) => {
+        await deleteTask(id);
+        loadTasks();
+    };
+
+    const handleDone = async (task) => {
+        await updateTask(task.id, {
+            title: task.title,
+            description: task.description,
+            status: "Done",
+        });
+
+        loadTasks();
+    }
 
     return (
         <div>
-            <h2>Lista de Tarefas</h2>
-
-            <div>
-                <h3>Nova Tarefa</h3>
+            <div
+                style={{
+                    marginBottom: "20px",
+                    display: "flex",
+                    gap: "10px",
+                }}
+            >
                 <input
-                    placeholder="Título"
+                    placeholder="TÃ­tulo"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    style={{
+                        padding: "10px",
+                        width: "200px",
+                    }}
                 />
+
                 <input
-                    placeholder="Descrição"
+                    placeholder="DescriÃ§Ã£o"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    style={{
+                        padding: "10px",
+                        width: "300px",
+                    }}
                 />
-                <button onClick={handleCreate}>Criar</button>
+
+                <button onClick={handleCreate}>
+                    Criar
+                </button>
             </div>
 
-            <hr />
-
             {tasks.map((task) => (
-                <div key={task.id}>
-                    <p><strong>{task.title}</strong></p>
+                <div
+                    key={task.id}
+                    style={{
+                        border: "1px solid #ccc",
+                        padding: "15px",
+                        marginBottom: "10px",
+                        borderRadius: "8px",
+                    }}
+                >
+                    <h3>{task.title}</h3>
+
                     <p>{task.description}</p>
-                    <p>Status: {task.status}</p>
-                    <hr />
+
+                    <p>
+                        <strong>Status:</strong> {task.status}
+                    </p>
+
+                    <div style={{ display: "flex", gap: "10px" }}>
+                        <button onClick={() => handleDone(task)}>
+                            Concluir
+                        </button>
+
+                        <button onClick={() => handleDelete(task.id)}>
+                            Deletar
+                        </button>
+                    </div>
                 </div>
             ))}
         </div>
-    );
-}
+    )
+};
 
 export default TaskList;
